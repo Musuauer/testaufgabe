@@ -1,28 +1,72 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import axios from 'axios'
+import { Header } from './components/Header'
+import { Content } from './components/Content'
+import './App.css'
 
 class App extends Component {
-  render() {
+  state = {
+    title: '',
+    subtitle: '',
+    footer: '',
+    images: []
+  }
+
+  componentDidMount () {
+    this.setContent()
+  }
+
+  getContentFromAPI = async () => {
+    try {
+      return await axios.get('https://api.admiralcloud.com/v2/publicArea/deliver/79cc6fd31e2e0285402269')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  setContent = async () => {
+    const content = await this.getContentFromAPI()
+
+    if (content) {
+      console.log('content from API:', content)
+
+      const header = content.data.mediaContainers[0].metadata.map(data => data.content)
+
+      const subtitle = header[1].split(/\b(?![\?\.\!])/)
+
+      const footer = content.data.metadata[1].content
+
+      const images = content.data.mediaContainers.map(container => (
+        container.previewImages.map(previewImage => previewImage)
+      ))
+
+      console.log('images from API:', images)
+
+      this.setState({
+        title: header[0],
+        subtitle: header[1].match(/[^\.!\?]+[\.!\?]+/g),
+        footer,
+        images
+      })
+    }
+  }
+
+  render () {
+    const { title, subtitle, footer, images } = this.state
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='App'>
+        <Header
+          title={title}
+          subtitle={subtitle}
+        />
+        <Content
+          footer={footer}
+          images={images}
+        />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
