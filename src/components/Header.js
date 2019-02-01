@@ -28,7 +28,6 @@ const StyledHeader = styled.header`
   }
 `
 const Banner = styled.div`
-top: 0; */
 width: 100%;
 height: 120px;
 background-color: rgba(31,39,50,.5);
