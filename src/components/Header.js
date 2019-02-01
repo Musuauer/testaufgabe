@@ -13,9 +13,10 @@ const StyledHeader = styled.header`
   h1 {
     margin-top: 2rem;
   }
-  h3 {
+  p {
+    text-align: left;
     margin: 2rem;
-    width: 50%;
+    width: 60%;
   }
 `
 
@@ -27,9 +28,9 @@ export const Header = ({ title, subtitle }) => {
         {title}
       </h1>
 
-      <h3 tabIndex='1'>
+      <p tabIndex='1'>
         {subtitle}
-      </h3>
+      </p>
 
     </StyledHeader>
 

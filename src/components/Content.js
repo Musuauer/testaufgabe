@@ -9,7 +9,6 @@ flex-wrap: wrap;
 justify-content: center;
 width: 70%;
 margin: 2rem auto;
-border: 1px solid red;
 
   li{
   height: 7rem;

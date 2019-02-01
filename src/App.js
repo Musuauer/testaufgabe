@@ -39,7 +39,7 @@ class App extends Component {
         return (
           <span >
             <div key={i}>{item}</div>
-            {divider}
+            {/* {divider} */}
           </span>
         )
       })
