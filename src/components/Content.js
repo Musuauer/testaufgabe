@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import ImageGallery from './ImageGallery'
+import { Footer } from './Footer'
 
 const ImageList = styled.ul`
 position: relative;
@@ -7,8 +9,8 @@ list-style: none;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
-width: 70%;
 margin: 2rem auto;
+z-index: 99;
 
   li{
   height: 7rem;
@@ -23,9 +25,13 @@ margin: 2rem auto;
 
 `
 
-export const Content = ({ footer, images }) => {
+export const Content = ({ images, credit }) => {
   return (
     <section className='content'>
+      <ImageGallery
+        images={images}
+        credit={credit}
+      />
 
       <ImageList className='images' tabIndex='1'>
         {images.map((image, index) =>
@@ -41,9 +47,9 @@ export const Content = ({ footer, images }) => {
         )}
       </ImageList>
 
-      <p tabIndex='1'>
-        {footer}
-      </p>
+      <Footer
+        credit={credit}
+      />
     </section>
 
   )
