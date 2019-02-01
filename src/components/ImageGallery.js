@@ -20,7 +20,6 @@ font-size: 3rem;
 background:  rgba(31,39,50,.5);
 z-index: 999;
 color: white;
-/* border: none; */
 
 :focus {outline:0;}
 `
@@ -58,7 +57,6 @@ export default class ImageGallery extends Component {
         <Gallery
           background={this.state.images[this.state.currentImageIndex][0].signedUrl}
         >
-          {/* <img src={this.state.images[this.state.currentImageIndex][0].signedUrl} alt='' /> */}
           <StyledButton
             onClick={this.nextImage}>
           >
