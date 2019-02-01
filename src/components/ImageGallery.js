@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const Gallery = styled.div`
@@ -24,48 +24,13 @@ color: white;
 :focus {outline:0;}
 `
 
-export default class ImageGallery extends Component {
-  state={
-    images: [],
-    currentImageIndex: 2
-  }
-
-  componentDidMount () {
-    console.log('gallery props', this.props.images[0][0].signedUrl)
-    this.setState({
-      images: this.props.images,
-      currentImage: this.props.images[this.state.currentImageIndex][0].signedUrl
-    })
-  }
-
-  nextImage = () => {
-    const currentIndex = this.state.currentImageIndex
-    const newIndex = currentIndex + 1
-    console.log('comparison', this.state.images.length, currentIndex)
-
-    this.setState({
-      currentImageIndex: (this.state.images.length === newIndex)
-        ? 0
-        : newIndex
-    })
-  }
-
-  render () {
-    console.log('gallery state', this.state)
-    if (this.state.images.length > 0) {
-      return (
-        <Gallery
-          background={this.state.images[this.state.currentImageIndex][0].signedUrl}
-        >
-          <StyledButton
-            onClick={this.nextImage}>
+export const ImageGallery = ({ images, currentIndex, next }) => (
+  <Gallery
+    background={images[currentIndex][0].signedUrl}
+  >
+    <StyledButton
+      onClick={next}>
           >
-          </StyledButton>
-        </Gallery>
-      )
-    }
-    return (
-      <div>Loading...</div>
-    )
-  }
-}
+    </StyledButton>
+  </Gallery>
+)

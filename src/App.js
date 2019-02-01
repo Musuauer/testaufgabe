@@ -6,10 +6,10 @@ import './App.css'
 
 class App extends Component {
   state = {
-    title: '',
-    subtitle: [],
     footer: '',
-    images: []
+    headers: [],
+    images: [],
+    currentIndex: 2
   }
 
   componentDidMount () {
@@ -30,40 +30,55 @@ class App extends Component {
     if (content) {
       console.log('content from API:', content)
 
-      const header = content.data.mediaContainers[0].metadata.map(data => data.content)
-
-      const subtitleArray = header[1].split('.')
-
-      const credit = content.data.metadata[1].content
-
       const images = content.data.mediaContainers.map(container => (
         container.previewImages.map(previewImage => previewImage)
       ))
 
       console.log('images from API:', images)
 
+      const headers = content.data.mediaContainers.map(container => (
+        container.metadata.map(data => data.content)
+      )
+      )
+
+      console.log('headers from API:', headers)
+
+      const credit = content.data.metadata[1].content
+
       this.setState({
-        title: header[0],
-        subtitle: subtitleArray,
+        headers,
         credit,
         images
       })
     }
   }
 
+  next = () => {
+    const currentIndex = this.state.currentIndex
+    const newIndex = currentIndex + 1
+
+    this.setState({
+      currentIndex: (this.state.images.length === newIndex)
+        ? 0
+        : newIndex
+    })
+  }
+
   render () {
-    const { title, subtitle, credit, images } = this.state
+    const { headers, credit, images, currentIndex } = this.state
 
     if (images.length > 0) {
       return (
         <div className='App'>
           <Header
-            title={title}
-            subtitle={subtitle}
+            headers={headers}
+            currentIndex={currentIndex}
           />
           <Content
             credit={credit}
             images={images}
+            currentIndex={currentIndex}
+            next={this.next}
           />
         </div>
       )

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ImageGallery from './ImageGallery'
+import { ImageGallery } from './ImageGallery'
 import { Footer } from './Footer'
 
 const ImageList = styled.ul`
@@ -25,32 +25,32 @@ z-index: 99;
 
 `
 
-export const Content = ({ images, credit }) => {
-  return (
-    <section className='content'>
-      <ImageGallery
-        images={images}
-        credit={credit}
-      />
+export const Content = ({ images, credit, currentIndex, next }) => (
+  <section className='content'>
+    <ImageGallery
+      images={images}
+      credit={credit}
+      currentIndex={currentIndex}
+      next={next}
+    />
 
-      <ImageList className='images' tabIndex='1'>
-        {images.map((image, index) =>
-          <li key={index}
-            className='image'
-          >
-            {console.log('image url', image[0])}
-            <img
-              src={image[5].signedUrl}
-              alt=''
-            />
-          </li>
-        )}
-      </ImageList>
+    <ImageList className='images' tabIndex='1'>
+      {images.map((image, index) =>
+        <li key={index}
+          className='image'
+        >
+          {console.log('image url', image[0])}
+          <img
+            src={image[5].signedUrl}
+            alt=''
+          />
+        </li>
+      )}
+    </ImageList>
 
-      <Footer
-        credit={credit}
-      />
-    </section>
+    <Footer
+      credit={credit}
+    />
+  </section>
 
-  )
-}
+)

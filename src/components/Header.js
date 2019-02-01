@@ -14,9 +14,10 @@ const StyledHeader = styled.header`
   color: white;
   z-index: 9;
 
-  h1 {
-    margin-top: 3rem;
+  .title{
+    margin-top: 12rem;
   }
+
   .subtitle{
     margin-top: 3rem;
     width: 70%;
@@ -28,11 +29,14 @@ const StyledHeader = styled.header`
   }
 `
 const Banner = styled.div`
+position: absolute;
+top: 0;
 width: 100%;
 height: 120px;
 background-color: rgba(31,39,50,.5);
 display: flex;
 justify-content: space-between;
+align-items: center;
 padding: 0 2rem;
 
   h1 {
@@ -46,27 +50,42 @@ padding: 0 2rem;
   }
 `
 
-export const Header = ({ title, subtitle }) => {
+export const Header = ({ headers, currentIndex }) => {
+  console.log('header props', headers)
+  const title = headers[currentIndex][0]
+  let subtitle = ''
+  headers[currentIndex][1] && (
+    subtitle = headers[currentIndex][1]
+  )
+  const subtitleArray = subtitle.split('.')
+  console.log('title', title)
+  console.log('subtitle', subtitleArray)
+
   return (
     <StyledHeader>
       <Banner>
         <div className='logo' />
         <h1>AdmiralCloud</h1>
+
       </Banner>
 
-      <h1 tabIndex='1'>
-        {title}
-      </h1>
-
-      <div tabIndex='1' className='subtitle'>
-        {subtitle.map((item, i, arr) => {
-          return (
-            <p key={i}>{item}</p>
-          )
-        })}
+      <div className='title'>
+        <h1 tabIndex='1'>
+          {title}
+        </h1>
       </div>
 
-    </StyledHeader>
+      {subtitleArray && (
+        <div tabIndex='1' className='subtitle'>
+          {subtitleArray.map((item, i, arr) => {
+            return (
+              <p key={i}>{item}</p>
+            )
+          })}
+        </div>
+      )
+      }
 
+    </StyledHeader>
   )
 }
