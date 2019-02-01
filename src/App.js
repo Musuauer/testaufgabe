@@ -35,7 +35,7 @@ class App extends Component {
       const subtitleArray = header[1].split('.')
 
       const subtitle = subtitleArray.map((item, i, arr) => {
-        let divider = i < subtitleArray.length - 1 && <br />
+        // let divider = i < subtitleArray.length - 1 && <br />
         return (
           <span >
             <div key={i}>{item}</div>
