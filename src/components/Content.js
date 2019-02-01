@@ -23,6 +23,12 @@ z-index: 99;
   margin:auto;
 }
 
+@media (max-width: 700px) {
+    li {
+      height: 10rem;
+    }
+  }
+
 `
 
 export const Content = ({ images, credit, currentIndex, next }) => (

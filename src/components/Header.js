@@ -22,10 +22,26 @@ const StyledHeader = styled.header`
     margin-top: 3rem;
     width: 70%;
   }
+
   p {
     text-align: left;
     margin-bottom: 1rem;
     width: 60%;
+  }
+
+  @media (max-width: 700px) {
+    .title {
+      margin-top: 6rem;
+    }
+
+    .subtitle {
+      width: 90%;
+      margin-top: 1rem;
+    }
+
+    p {
+      width: 95%;
+    }
   }
 `
 const Banner = styled.div`
@@ -38,6 +54,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 0 2rem;
+z-index: 999;
 
   h1 {
     font-weight: 400;
@@ -48,6 +65,16 @@ padding: 0 2rem;
     width: 12rem;
     background: url('https://wwwcdn.admiralcloud.com/wp-content/uploads/2018/09/ac-white-small.png')  no-repeat center center; background-size: contain;
   }
+
+  @media (max-width: 700px) {
+    padding: 0 .5rem;
+    height: 70px;
+
+    .logo {
+      width: 6rem;
+    }
+  }
+
 `
 
 export const Header = ({ headers, currentIndex }) => {
@@ -66,7 +93,6 @@ export const Header = ({ headers, currentIndex }) => {
       <Banner>
         <div className='logo' />
         <h1>AdmiralCloud</h1>
-
       </Banner>
 
       <div className='title'>
